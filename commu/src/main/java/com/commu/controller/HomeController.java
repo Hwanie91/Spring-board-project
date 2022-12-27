@@ -1,4 +1,4 @@
-package com.commu.comtroller;
+package com.commu.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
