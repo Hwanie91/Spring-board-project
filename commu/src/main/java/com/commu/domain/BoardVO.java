@@ -13,6 +13,6 @@ public class BoardVO {
 	private String writer;
 	private int hit;
 	private Date regdate;
-	private Date updataDate;
+	private Date updateDate;
 
 }
