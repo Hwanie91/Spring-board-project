@@ -42,8 +42,13 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@GetMapping("/register")
+	public void register() {
+		// 이동할 주소를 리턴하지 않으면, 요청한 이름으로의 jsp 파일을 찾음
+	}
+	
 	// 글읽기
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model) { // @RequestParam : 요청 전달값으로 글번호 이용.
 		log.info("/get");
 		model.addAttribute("board", service.get(bno));

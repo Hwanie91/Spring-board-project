@@ -67,13 +67,12 @@
     	</div>
     </div>
 
-
-    <script src="/commu/resources/js/bootstrap.bundle.min.js"></script>
-    <script src="/commu/resources/js/tiny-slider.js"></script>
-    <script src="/commu/resources/js/aos.js"></script>
-    <script src="/commu/resources/js/navbar.js"></script>
-    <script src="/commu/resources/js/counter.js"></script>
-    <script src="/commu/resources/js/custom.js"></script>
+<script src="/commu/resources/js/bootstrap.bundle.min.js"></script>
+<script src="/commu/resources/js/tiny-slider.js"></script>
+<script src="/commu/resources/js/aos.js"></script>
+<script src="/commu/resources/js/navbar.js"></script>
+<script src="/commu/resources/js/counter.js"></script>
+<script src="/commu/resources/js/custom.js"></script>
   </body>
   </html>
 

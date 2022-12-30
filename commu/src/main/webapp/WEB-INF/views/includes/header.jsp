@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="/commu/resources/css/tiny-slider.css">
 	<link rel="stylesheet" href="/commu/resources/css/aos.css">
 	<link rel="stylesheet" href="/commu/resources/css/style.css">
+	<script src="/commu/resources/js/jquery.min.js"></script>
 
 	<title>Commu Board Project</title>
 </head>
@@ -44,7 +45,7 @@
 
 					<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">게시판</a></li>
+						<li><a href="list">게시판</a></li>
 						<li><a href="#">영상저장소</a></li>
 						<li><a href="#">Contact Us</a></li>
 					</ul>

@@ -12,7 +12,7 @@
 					<h2 class="font-weight-bold text-primary heading">Commu 게시판</h2>
 				</div>
 			</div>
-			<div class="container">
+			<div class="container  bg-light">
 				<div class="row">
 	   				<div class="commu_board">
 						<div class="commu_board-body">
@@ -34,10 +34,10 @@
 							  	<tr>
 							  		<td class="col-md-1.5"><c:out value="${board.bno}"/></td>
 							  		<td class="col-md-6">
-							  			<a href="/board/get?bno=${board.bno }"><c:out value="${board.title}"/></a>
+							  			<a href="get?bno=${board.bno }"><c:out value="${board.title}"/></a>
 						  			</td>
 							  		<td class="col-md-2"><c:out value="${board.writer}"/></td>
-							  		<td class="col-md-1.5"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/> </td>
+							  		<td class="col-md-1.5"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate }"/> </td>
 							  		<td class="col-md-1"><c:out value="${board.hit}"/></td>
 							  	</tr>
 							  	</c:forEach>
@@ -73,7 +73,7 @@
 				<div class="modal-header"></div>
 				<div class="modal-body"></div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
+					<button id="modalClose" class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
 				</div>
 			</div>	
 		</div>
@@ -83,7 +83,7 @@
 $(document).ready(function() {
 	
 	$("#regBtn").on("click", function() {
-		self.location = "/board/register";
+		self.location = "register";
 	});
 	
 	var result = '<c:out value="${result}"/>'; // 자바스크립스 형추론 이용.
@@ -93,11 +93,19 @@ $(document).ready(function() {
 		if(result === '') { // ==는 값만 비교, ===은 값과 형식도 비교
 			return;
 		}
-		if(parseInt(result) > 0) {
-			$(".modal-body").html("게시글 " + parseInt(result) + "번이 등록");
+		if($.isNumeric(result)) {
+			if(parseInt(result) > 0){
+				$(".modal-body").html("게시글 " + parseInt(result) + "번이 등록");
+			} 
+		} else {
+			$(".modal-body").html(result);
 		}
-		$("#myModal").modal("show"); // 모달창 표시
+			$("#myModal").modal("show"); // 모달창 표시
 	}
+	
+	$("#modalClose").on("click", function() {
+		$("#myModal").modal("hide");
+	});
 });
 </script>
 
