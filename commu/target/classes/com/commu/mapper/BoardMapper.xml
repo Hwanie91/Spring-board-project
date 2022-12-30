@@ -11,6 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 </select>
 
+<select id="getListWithPaging" resultType="com.commu.domain.BoardVO">
+	SELECT * FROM co_board
+	<![CDATA[
+		WHERE bno > 0
+	]]>
+	ORDER BY bno DESC LIMIT #{skip}, #{amount}
+</select>
+
 <insert id="insert">
 	INSERT INTO co_board (title, content, writer)
 	VALUES(#{title}, #{content}, #{writer})

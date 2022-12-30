@@ -3,10 +3,13 @@ package com.commu.mapper;
 import java.util.List;
 
 import com.commu.domain.BoardVO;
+import com.commu.domain.Criteria;
 
 public interface BoardMapper {
 	
 	public List<BoardVO> getList();
+	
+	public List<BoardVO> getListWithPaging(Criteria cri);
 	
 	public void insert(BoardVO vo);
 	

@@ -46,25 +46,41 @@
 						</div><!-- commu_board-body -->
 					</div><!-- commu_board -->	
 				</div>
-				
+				<!-- Pagination -->
 				<div class="row align-items-center py-5">
-					<div class="col-lg-3">
-						Pagination (1 of 10)
+					<div class="col-lg-4">
+						Pagination (<c:out value="${pageMaker.cri.pageNum}"/> of <c:out value="${pageMaker.endPage }"/>)
 					</div>
-					<div class="col-lg-6 text-center">
+					<div class="col-lg-5 text-center">
 						<div class="custom-pagination">
-							<a href="#">1</a>
-							<a href="#" class="active">2</a>
-							<a href="#">3</a>
-							<a href="#">4</a>
-							<a href="#">5</a>
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev }">
+			    					<li class="page-item Previous">
+					      				<a href="${pageMaker.startPage -1}">
+					      					Prev
+						      			</a>
+						    		</li>
+					    		</c:if>
+					    
+							    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+					    			<li class='page-item ${pageMaker.cri.pageNum==num?"active":"" }'>
+						    			<a href="${num}" class="btn_pagination">${num}</a>
+					    			</li>
+							    </c:forEach>
+							    <c:if test="${pageMaker.next}">
+								    <li class="page-item next">
+							      		<a href="${pageMaker.endPage +1}">
+								        	Next
+								      	</a>
+								    </li>
+							    </c:if>
+			  				</ul>
 						</div>
 					</div>
-				</div>
-			</div>
-			
-		</div>
-	</div>
+				</div><!-- Pagination -->
+			</div><!-- bg-light -->
+		</div><!-- container -->
+	</div><!-- section -->
 	
 	<!-- 알림창 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -78,6 +94,11 @@
 			</div>	
 		</div>
 	</div>
+<form method="get" id="actionForm" action="list">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+	<%-- <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+</form>
 
 <script>
 $(document).ready(function() {
@@ -105,6 +126,16 @@ $(document).ready(function() {
 	
 	$("#modalClose").on("click", function() {
 		$("#myModal").modal("hide");
+	});
+	
+	var actForm = $("#actionForm");
+	
+	$(".page-item a").on("click", function(e) {
+		e.preventDefault();
+		
+		actForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actForm.attr("action", "list");
+		actForm.submit();
 	});
 });
 </script>
