@@ -53,24 +53,24 @@
 					</div>
 					<div class="col-lg-5 text-center">
 						<div class="custom-pagination">
-							<ul class="pagination">
+							<ul class="pagination justify-content-center">
 								<c:if test="${pageMaker.prev }">
 			    					<li class="page-item Previous">
-					      				<a href="${pageMaker.startPage -1}">
-					      					Prev
+					      				<a href="${pageMaker.startPage -1}" class="page-link" aria-label="Previous">
+					      					<span aria-hidden="true">&laquo;</span>
 						      			</a>
 						    		</li>
 					    		</c:if>
 					    
 							    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
 					    			<li class='page-item ${pageMaker.cri.pageNum==num?"active":"" }'>
-						    			<a href="${num}" class="btn_pagination">${num}</a>
+						    			<a href="${num}" class="page-link">${num}</a>
 					    			</li>
 							    </c:forEach>
 							    <c:if test="${pageMaker.next}">
 								    <li class="page-item next">
-							      		<a href="${pageMaker.endPage +1}">
-								        	Next
+							      		<a href="${pageMaker.endPage +1}" class="page-link" aria-label="Next">
+								        	<span aria-hidden="true">&raquo;</span>
 								      	</a>
 								    </li>
 							    </c:if>

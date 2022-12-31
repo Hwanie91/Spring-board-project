@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.commu.domain.BoardVO;
+import com.commu.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,7 +20,7 @@ public class BoardServiceTests {
 	@Setter(onMethod_ = {@Autowired}) // 어노테이션에 전달값이 여러개의 배열 형태라면 {}이용
 	private BoardService service;
 	
-	@Test
+	//@Test
 	public void testResgister() {
 		BoardVO vo = new BoardVO();
 		vo.setTitle("Git");
@@ -29,5 +30,10 @@ public class BoardServiceTests {
 		service.register(vo);
 		log.info("생성된 게시물 번호 : " + vo.getBno());
 		// 서비스 -> 매퍼 -> mybatis query, 다른 메소드 테스트는 비슷함
+	}
+	
+	@Test
+	public void testGetList() {
+		service.getList(new Criteria(1, 15)).forEach(Board -> log.info(Board));
 	}
 }

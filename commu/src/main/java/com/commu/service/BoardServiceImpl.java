@@ -22,9 +22,9 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper mapper;
 
 	@Override
-	public void register(BoardVO vo) {
-		mapper.insertLastId(vo);
-		log.info("register..." + vo);
+	public void register(BoardVO Board) {
+		mapper.insertLastId(Board);
+		log.info("register..." + Board);
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean modify(BoardVO vo) {
-		log.info("modify..." + vo);
-		return mapper.update(vo) == 1;
+	public boolean modify(BoardVO Board) {
+		log.info("modify..." + Board);
+		return mapper.update(Board) == 1;
 	}
 
 	@Override

@@ -44,8 +44,8 @@
 					<a href="#" class="logo m-0 float-start">Commu Board</a>
 
 					<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="list">게시판</a></li>
+						<li class="active"><a href="/commu">Home</a></li>
+						<li><a href="/commu/board/list">게시판</a></li>
 						<li><a href="#">영상저장소</a></li>
 						<li><a href="#">Contact Us</a></li>
 					</ul>
