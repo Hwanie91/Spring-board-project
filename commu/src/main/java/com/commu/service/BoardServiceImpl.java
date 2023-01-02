@@ -51,6 +51,14 @@ public class BoardServiceImpl implements BoardService {
 		// 페이징 조건대로 추출
 		return mapper.getListWithPaging(cri);
 	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		return mapper.getTotalCount(cri);
+	}
+
+
+	
 	
 
 }

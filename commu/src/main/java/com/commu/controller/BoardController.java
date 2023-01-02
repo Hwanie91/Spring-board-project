@@ -29,7 +29,9 @@ public class BoardController {
 	private void list(Criteria cri, Model model) {
 		log.info("list");
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 300));
+		
+		int total = service.getTotal(cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 		// 컨트롤러 -> 서비스 -> 매퍼 -> mybatis
 	}
