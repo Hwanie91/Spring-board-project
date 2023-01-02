@@ -11,6 +11,9 @@ public class Criteria { // Criteria : 페이징 처리 기준을 갖는 벨류 �
 	
 	private int pageNum; // 현재 페이지 번호
 	private int amount; // 페이지당 게시물 수
+	private String keyword;
+	private String type;
+	private String[] typeArr;
 	
 	public Criteria() {
 		this(1, 15); // 아래쪽에 전달해 줄 파라미터값 2개 생성자 호출
@@ -23,6 +26,11 @@ public class Criteria { // Criteria : 페이징 처리 기준을 갖는 벨류 �
 	
 	public int getSkip() {
 		return (this.pageNum - 1) * this.amount;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+		this.typeArr = type.split("");
 	}
 	
 }

@@ -41,7 +41,7 @@
 	   								<button type="submit" data-oper="modify" class="btn btn-primary">수정</button>
 	   								<button type="submit" data-oper="remove" class="btn btn-primary">삭제</button>
 	   								<button type="submit" data-oper="list" class="btn btn-primary">목록</button>
-	   								</button>
+	   								
 	   							</form>
 	   						</div>
 	   					</div>
@@ -55,7 +55,7 @@
 	
 <script>
 $(document).ready(function() {
-	var formObj = $("form");
+	var formObj = $("#modifyForm");
 	$('button').on("click", function(e) {
 		e.preventDefault();
 		
@@ -65,11 +65,22 @@ $(document).ready(function() {
 		if(operation === 'remove') {
 			formObj.attr("action", "remove");
 		} else if(operation === 'list') {
-			self.location = "list";
-			return;
+			var PageNumTag = $("input[name='pageNum']");
+			var amountTag = $("input[name='amount']");
+			var keywordTag = $("input[name='keyword']");
+			var typetagTag = $("input[name='type']");
+			
+			formObj.attr("action", "list").attr("method","get");
+			formObj.empty();
+			formObj.append(PageNumTag);
+			formObj.append(amountTag);
+			formObj.append(keywordTag);
+			formObj.append(typetagTag);
 		}
+		console.log(formObj);
 		formObj.submit();
-	})
+	});
+	
 })
 </script>
 

@@ -3,6 +3,7 @@ package com.commu.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,30 +53,41 @@ public class BoardController {
 	
 	// 글읽기
 	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("bno") Long bno, Model model) { // @RequestParam : 요청 전달값으로 글번호 이용.
-		log.info("/get");
+	public void get(@RequestParam("bno") Long bno, Model model, @ModelAttribute("cri") Criteria cri) { 
+		// @RequestParam : 요청 전달값으로 글번호 이용.
+		// @ModelAttribute("cri") Criteria cri == model.addAttribute("cri", cri);
+		log.info("/get or /modify");
 		model.addAttribute("board", service.get(bno));
 		
 	}
 	
 	// 글 수정
 	@PostMapping("/modify") // post 요청으로 /modify가 온다면, 아래 메소드 수행
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, RedirectAttributes rttr, Criteria cri) {
 		log.info("modify : " + board);
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		// 수정이 성공하면 success 메시지가 포함되어 이동, 실패하면 메세지 빼고 이동
 		return "redirect:/board/list";
 	}
 	
 	// 글 삭제
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("remove" + bno);
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		return "redirect:/board/list";
 	}
 }

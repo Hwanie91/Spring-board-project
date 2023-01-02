@@ -34,7 +34,7 @@
 							  	<tr>
 							  		<td class="col-md-1.5"><c:out value="${board.bno}"/></td>
 							  		<td class="col-md-6">
-							  			<a href="get?bno=${board.bno }"><c:out value="${board.title}"/></a>
+							  			<a href="${board.bno}" class="move"><c:out value="${board.title}"/></a>
 						  			</td>
 							  		<td class="col-md-2"><c:out value="${board.writer}"/></td>
 							  		<td class="col-md-1.5"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate }"/> </td>
@@ -135,6 +135,15 @@ $(document).ready(function() {
 		
 		actForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actForm.attr("action", "list");
+		actForm.submit();
+	});
+	
+	$(".move").on("click",function(e) {
+		e.preventDefault();
+		
+		actForm.append(" <input type='hidden' name='bno' " + " value=' "+ $(this).attr("href") +"'>");
+		// <input type='hidden' name='bno' value='글번호'>
+		actForm.attr("action", "/commu/board/get");
 		actForm.submit();
 	});
 });
