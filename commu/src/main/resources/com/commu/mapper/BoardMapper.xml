@@ -5,6 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <mapper namespace="com.commu.mapper.BoardMapper">
 
+<sql id="criteria">
+	<trim prefix="AND (" suffix=") " prefixOverrides="OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						title LIKE concat('%',#{keyword},'%')
+					</when>
+					<when test="type == 'C'.toString()">
+						content LIKE concat('%',#{keyword},'%')
+					</when>
+					<when test="type == 'W'.toString()">
+						writer LIKE concat('%',#{keyword},'%')
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
 <select id="getList" resultType="com.commu.domain.BoardVO">
 	<![CDATA[
 		SELECT * FROM co_board WHERE bno > 0 ORDER BY bno DESC
@@ -16,13 +36,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		WHERE bno > 0
 	]]>
+	<if test="keyword != null">
+		<include refid="criteria"></include>
+	</if>
 	ORDER BY bno DESC LIMIT #{skip}, #{amount}
+	
 </select>
 
 <select id="getTotalCount" resultType="int">
-	<![CDATA[
-		SELECT count(bno) FROM co_board WHERE bno > 0
-	]]>
+	
+	SELECT count(*) FROM co_board 
+	<if test="keyword != null">
+		WHERE bno > 0 <include refid="criteria"></include>
+	</if>
 </select>
 
 <insert id="insert">

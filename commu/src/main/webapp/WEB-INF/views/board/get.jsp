@@ -37,11 +37,11 @@
 	   									<input class="form-control" name="writer" 
 	   											value='<c:out value="${board.writer }"></c:out>' readonly="readonly">
 	   								</div>
-	   								<button data-oper="modify" class="btn btn-primary">
-	   									<a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a>
+	   								<button data-oper="modify" id="modifyB" class="btn btn-primary">수정
+	   									<%-- <a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a> --%> 
 	   								</button>
-	   								<button data-oper="list" class="btn btn-primary">
-	   									<a href="/commu/board/list?pageNum=${cri.pageNum }&amount=${cri.amount} "> 목록</a>
+	   								<button data-oper="list" id="listB" class="btn btn-primary">목록
+	   									<%-- <a href="/commu/board/list?pageNum=${cri.pageNum }&amount=${cri.amount} "> 목록</a> --%>
 	   								</button>
 	   							</div>
 	   						</div>
@@ -56,19 +56,31 @@
 <!-- 글 읽기 차에서 페이지 정보 처리 -->	
 <form method="get" id="infoForm" action="modify">
 	<input type="hidden" id="bno" name="bno" value="${board.bno }">
-	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-	<%-- <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+	<input type="hidden" name="pageNum" value="${cri.pageNum }">
+	<input type="hidden" name="amount" value="${cri.amount }">
+	<input type="hidden" name="keyword" value="${cri.keyword }">
+	<input type="hidden" name="type" value="${cri.type }">
 </form>	<!-- 폼을 생성해서 게시물 번호를 숨김 값으로 전달 -->
 
 <script>
 $(document).ready(function() {
-	$("#modify_btn").on("click", function(e) {
+	$("#listB").on("click", function(e) {
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		console.log(operation);
-		if(operation == 'modify') {
-			$("#infoForm").attr("action", "modify")
+		if(operation === 'list') {
+			$("#infoForm").attr("action", "list");
+			$("#infoForm").find("#bno").remove();
+		}
+		$("#infoForm").submit();
+	});
+	
+	$("#modifyB").on("click", function(e) {
+		e.preventDefault();
+		var operation = $(this).data("oper");
+		console.log(operation);
+		if(operation === 'modify') {
+			$("#infoForm").attr("action", "modify");
 		}
 		$("#infoForm").submit();
 	});

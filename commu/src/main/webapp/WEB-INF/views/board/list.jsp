@@ -43,6 +43,22 @@
 							  	</c:forEach>
 							  </tbody>
 							</table>
+							<!-- 검색창 추가 -->
+							<div class="search_wrap">
+								<div class="search_area">
+									<select name="type">
+										<option value="" <c:out value="${page.Maker.cri.type == null?'select':'' }"/>>--</option>
+										<option value="T" <c:out value="${page.Maker.cri.type eq 'T'?'select':'' }"/>>제목</option>
+										<option value="C" <c:out value="${page.Maker.cri.type eq 'C'?'select':'' }"/>>내용</option>
+										<option value="W" <c:out value="${page.Maker.cri.type eq 'W'?'select':'' }"/>>작성자</option>
+										<option value="TC" <c:out value="${page.Maker.cri.type eq 'TC'?'select':'' }"/>>제목 + 내용</option>
+										<option value="TW" <c:out value="${page.Maker.cri.type eq 'TW'?'select':'' }"/>>제목 + 작성자</option>
+										<option value="TCW" <c:out value="${page.Maker.cri.type eq 'TCW'?'select':'' }"/>>제목 + 내용 + 작성자</option>
+									</select>
+									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
+									<button class="btn-success">Search</button>
+								</div>
+							</div><!-- search -->
 						</div><!-- commu_board-body -->
 					</div><!-- commu_board -->	
 				</div>
@@ -97,7 +113,8 @@
 <form method="get" id="actionForm" action="list">
 	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-	<%-- <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+	<input type="hidden" name="type" value="${pageMaker.cri.type }">
 </form>
 
 <script>
@@ -141,10 +158,39 @@ $(document).ready(function() {
 	$(".move").on("click",function(e) {
 		e.preventDefault();
 		
+		var bno = actForm.find("input[name='bno']").val();
+		if(bno != '') {
+			actForm.find("input[name='bno']").remove();
+		}
+		
 		actForm.append(" <input type='hidden' name='bno' " + " value=' "+ $(this).attr("href") +"'>");
 		// <input type='hidden' name='bno' value='글번호'>
 		actForm.attr("action", "/commu/board/get");
 		actForm.submit();
+	});
+	
+	$(".search_area button").on("click", function(e) {
+		var type = $(".search_area select").val();
+		var keyword = $(".search_area input[name='keyword']").val();
+		var skey = '<c:out value="${pageMaker.cri.keyword}"/>';
+		console.log("이전 검색어 : " + skey);
+		console.log("현재 검색어 : " + keyword);
+		
+		if(!type) {
+			alert("키워드를 입력하세요")
+			return false;
+		}
+		if(!keyword) {
+			alert("키워드를 입력하세요")
+			return false;
+		}
+		if(!skey) {
+			actForm.find("input[name='pageNum']").val(1);
+		}
+		actForm.find("input[name='type']").val(type);
+		actForm.find("input[name='keyword']").val(keyword);
+		actForm.submit();
+		
 	});
 });
 </script>
