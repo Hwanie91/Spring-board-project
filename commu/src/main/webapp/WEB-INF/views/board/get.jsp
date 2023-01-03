@@ -16,8 +16,8 @@
 			
 			<div class="container">
 				<div class="row">
-	   				<div class="bg-light col-lg-12">
-	   					<div>
+	   				<div class="col-lg-12">
+	   					<div class="bg-light border p-5 rounded-3">
 	   						<div>
 	   							<div>
 	   								<div class="form-group">게시물 번호
@@ -37,13 +37,28 @@
 	   									<input class="form-control" name="writer" 
 	   											value='<c:out value="${board.writer }"></c:out>' readonly="readonly">
 	   								</div>
+	   								<div class="p-2">
 	   								<button data-oper="modify" id="modifyB" class="btn btn-primary">수정
 	   									<%-- <a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a> --%> 
 	   								</button>
 	   								<button data-oper="list" id="listB" class="btn btn-primary">목록
 	   									<%-- <a href="/commu/board/list?pageNum=${cri.pageNum }&amount=${cri.amount} "> 목록</a> --%>
 	   								</button>
+	   								</div>
 	   							</div>
+	   							<!-- 댓글 -->
+	   							<div class="panel p-1" >
+	   								<div style="display: flex; justify-content: space-between; align-items: center;">
+	   									<div><i class="bi bi-chat-right-text-fill"></i>댓글</div>
+	   									<div><button class="btn-sm btn-success">reply</button></div>
+	   								</div>
+	   								<br>
+	   								<div class="panel-body">
+	   									<ul class="chat">
+	   										<li>new reply</li>
+	   									</ul>
+	   								</div>
+	   							</div><!-- 댓글 -->
 	   						</div>
 	   					</div>
 	   				</div>			
@@ -62,6 +77,8 @@
 	<input type="hidden" name="type" value="${cri.type }">
 </form>	<!-- 폼을 생성해서 게시물 번호를 숨김 값으로 전달 -->
 
+
+<script src="/commu/resources/js/reply.js"></script>
 <script>
 $(document).ready(function() {
 	$("#listB").on("click", function(e) {
@@ -84,6 +101,17 @@ $(document).ready(function() {
 		}
 		$("#infoForm").submit();
 	});
+	
+	var bnoValue = '<c:out value="${board.bno}"/>';
+	
+	/* replyService.add({
+		reply : "js test",
+		replyer : "tester",
+		bno : bnoValue
+	}, function(result){
+			alert("result" + result);
+	}); */
+	
 });	
 </script>
 

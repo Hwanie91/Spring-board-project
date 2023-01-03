@@ -14,7 +14,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 	<link rel="stylesheet" href="/commu/resources/fonts/icomoon/style.css">
 	<link rel="stylesheet" href="/commu/resources/fonts/flaticon/font/flaticon.css">
