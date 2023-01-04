@@ -174,6 +174,9 @@ $(document).ready(function() {
 			alert(result);
 			modal.find("input").val("");
 			modal.modal("hide");
+			
+			// 댓글 작성 즉시 목록 갱신용 함수 호출
+			showList(-1);
 		});
 	});
 	
@@ -206,13 +209,59 @@ $(document).ready(function() {
 						str += " <li class='left clearfix' data-rno='"+ list[i].rno +"'> ";
 						str += " <div><div class='header'> ";
 						str += " <strong class='primart-font'> " + list[i].replyer + " </strong> ";
-						str += " <small class='float-sm-right'> " + list[i].replyDate + " </small></div> ";
+						str += " <small class='float-sm-right'> " + replyService.displayTime(list[i].replyDate) + " </small></div> ";
 						str += " <p> " + list[i].reply + " </p></div></li> "; 
 					}
 					replyUL.html(str);
 				});
 	} // showList end
 	showList(1);
+	
+	var modalModBtn = $("#modalModBtn");
+	var modalRemoveBtn = $("#modalRemoveBtn");
+	
+	$(".chat").on("click", "li", function(e) {
+		var rno = $(this).data("rno"); // 댓글에 포함된 값들 중에서 rno를 추출하여 변수 할당
+		console.log(rno);
+		
+		replyService.get(rno, function(reply) {
+			modalInputReply.val(reply.reply);
+			modalInputReplyer.val(reply.replyer);
+			modalInputReplydate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
+			// 댓글 목록의 값들을 모달창에 할당
+			
+			modal.data("rno", reply.rno); // 표시되는 모달창에 rno라는 이름으로 data-rno를 저장
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			modalModBtn.show();
+			modalRemoveBtn.show();
+			
+			$("#myModal").modal("show");
+		});
+	});
+	
+	// 댓글 수정
+	modalModBtn.on("click", function(e) {
+		var reply = {
+			rno : modal.data("rno"),
+			reply : modalInputReply.val()
+		};
+		replyService.update(reply, function(result) {
+			alert(result);
+			modal.modal("hide");
+			showList(-1);
+		});
+	}); // 댓글 수정 끝
+	
+	// 댓글 삭제
+	modalRemoveBtn.on("click", function(e) {
+		var rno = modal.data("rno");
+		replyService.remove(rno, function(result) {
+			alert(result);
+			modal.modal("hide");
+			showList(-1);
+		});
+	});
+	
 });	
 </script>
 
