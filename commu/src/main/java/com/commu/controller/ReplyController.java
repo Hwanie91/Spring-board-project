@@ -51,7 +51,7 @@ public class ReplyController {
 													@PathVariable("bno") Long bno) { 
 		// @PathVariable : url로 넘겨받은 값 이용
 		log.info("getList...");
-		Criteria cri = new Criteria(page, 10);
+		Criteria cri = new Criteria(page, 15);
 		log.info(cri);
 		
 		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);

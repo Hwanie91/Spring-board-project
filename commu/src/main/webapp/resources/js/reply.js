@@ -27,7 +27,27 @@ var replyService = (function() {
 		});
 		
 	}
+	
+	function getList(param, callback, error) {
+		console.log("getList...");
+		var bno = param.bno;
+		var page = param.page || 1; // 페이지 번호가 있으면 페이지 번호 전달 없으면 1전달.
+		
+		$.getJSON("/commu/replies/pages/" + bno + "/" + page, 
+					function(data) {
+						if(callback) {
+							callback(data);
+						}
+					}).fail(function(xhr, status, err) {
+						if(error) {
+							error(er);
+						}
+					});
+		
+	}
+	
 	return {
-		add: add
+		add: add,
+		getList: getList
 	};	
 })();
