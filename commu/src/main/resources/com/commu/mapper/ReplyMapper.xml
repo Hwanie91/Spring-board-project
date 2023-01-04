@@ -28,4 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	LIMIT #{cri.skip}, #{cri.amount}
 </select>
 
+<select id="getCountByBno" resultType="int">
+	SELECT count(*) FROM co_reply WHERE bno = #{bno}
+</select>
+
 </mapper>

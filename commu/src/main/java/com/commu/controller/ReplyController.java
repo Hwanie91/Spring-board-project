@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.commu.domain.Criteria;
+import com.commu.domain.ReplyPageDTO;
 import com.commu.domain.ReplyVO;
 import com.commu.service.ReplyService;
 
@@ -47,14 +48,14 @@ public class ReplyController {
 	}
 	
 	@GetMapping(value="/pages/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, 
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, 
 													@PathVariable("bno") Long bno) { 
 		// @PathVariable : url로 넘겨받은 값 이용
 		log.info("getList...");
 		Criteria cri = new Criteria(page, 15);
 		log.info(cri);
 		
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_JSON_VALUE})

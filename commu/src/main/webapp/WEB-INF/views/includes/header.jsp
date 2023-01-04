@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="/commu/resources/css/tiny-slider.css">
 	<link rel="stylesheet" href="/commu/resources/css/aos.css">
 	<link rel="stylesheet" href="/commu/resources/css/style.css">
-	<script src="/commu/resources/js/jquery.min.js"></script>
+	<script src="/commu/resources/js/jquery-3.6.3.min.js"></script>
 
 	<title>Commu Board Project</title>
 </head>

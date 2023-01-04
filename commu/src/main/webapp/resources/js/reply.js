@@ -11,7 +11,7 @@ var replyService = (function() {
 		
 		$.ajax({
 			type: 'post',
-			url: '/commu/replies/new',
+			url: '/commu/replies/new/',
 			data: JSON.stringify(reply),
 			contentType: "application/json; charset=utf-8",
 			success: function(result) {
@@ -36,7 +36,7 @@ var replyService = (function() {
 		$.getJSON("/commu/replies/pages/" + bno + "/" + page, 
 					function(data) {
 						if(callback) {
-							callback(data);
+							callback(data.replyTotalCnt, data.list);
 						}
 					}).fail(function(xhr, status, err) {
 						if(error) {

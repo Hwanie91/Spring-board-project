@@ -58,6 +58,9 @@
 	   										<li>new reply</li>
 	   									</ul>
 	   								</div>
+	   								<div class="panel-footer">
+	   									
+	   								</div>
 	   							</div><!-- 댓글 끝-->
 	   						</div>
 	   					</div><!-- div class="bg-light -->
@@ -190,6 +193,49 @@ $(document).ready(function() {
 			}
 	});
 	
+	// 댓글 페이징
+	var pageNum = 1;
+	var replyPageFooter = $(".panel-footer");
+	
+	function showReplyPage(replyCnt) {
+		var endNum = Math.ceil(pageNum / 10.0) * 10;
+		var startNum = endNum - 9;
+		var prev = startNum != 1;
+		var next = false;
+		
+		if(endNum * 10 >= replyCnt) {
+			endNum = Math.ceil(replyCnt / 10.0);
+		}
+		if(endNum * 10 < replyCnt) {
+			next = true;
+		}
+		
+		var str = " <ul class='pagination justify-content-center'> "; 
+		if(prev) {
+			str += " <li class='page-item Previous'> ";
+			str += " <a href="+ (startNum -1) +" class='page-link' aria-label='Previous'> ";
+			str += " <span aria-hidden='true'>&laquo;</span> ";
+			str += " </a> ";
+			str += " </li> ";
+		}
+		for(var i = startNum; i <= endNum; i++){
+			var active = pageNum == i ?"active":"";
+			str += " <li class='page-item "+ active +" '> ";
+			str += " <a href=" + i + " class='page-link'> "+ i +" </a> ";
+			str += " </li> ";
+		}
+		if(next) {
+			str += " <li class='page-item next'> ";
+			str += " <a href="+ (endNum - 1) +" class='page-link' aria-label='Next'> ";
+			str += " <span aria-hidden='true'>&raquo;</span> ";
+			str += " </a> ";
+			str += " </li> ";
+		}
+		str += " </ul> ";
+		console.log(str);
+		replyPageFooter.html(str);
+	}
+	
 	var replyUL = $(".chat");
 	
 	function showList(page) {
@@ -198,7 +244,15 @@ $(document).ready(function() {
 					bno : bnoValue, 
 					page : page || 1
 				}, 
-				function(list){
+				function(replyTotalCnt, list){
+					console.log("replyTotalCnt : " + replyTotalCnt);
+					if(page == -1) { // 페이지 번호가 음수 값이면
+						PageNum = Math.ceil(replyTotalCnt / 10.0); // 댓글의 마지막 페이지
+						showList(pageNum); // 댓글목록 새로고침
+						
+						return;
+					}
+					
 					var str = "";
 					
 					if(list == null || list.length == 0) {
@@ -213,10 +267,20 @@ $(document).ready(function() {
 						str += " <p> " + list[i].reply + " </p></div></li> "; 
 					}
 					replyUL.html(str);
+					showReplyPage(replyTotalCnt);
 				});
 	} // showList end
 	showList(1);
 	
+	// 댓글 페이징 클릭시
+	replyPageFooter.on("click", "li a", function(e) {
+		e.preventDefault();
+		var targetPageNum = $(this).attr("href");
+		pageNum = targetPageNum;
+		showList(pageNum);
+	});
+	
+
 	var modalModBtn = $("#modalModBtn");
 	var modalRemoveBtn = $("#modalRemoveBtn");
 	
@@ -261,6 +325,7 @@ $(document).ready(function() {
 			showList(-1);
 		});
 	});
+	
 	
 });	
 </script>
