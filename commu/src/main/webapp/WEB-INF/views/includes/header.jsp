@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!doctype html>
 <html>
 <head>
@@ -13,7 +15,7 @@
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 	<link rel="stylesheet" href="/commu/resources/fonts/icomoon/style.css">
@@ -22,6 +24,7 @@
 	<link rel="stylesheet" href="/commu/resources/css/tiny-slider.css">
 	<link rel="stylesheet" href="/commu/resources/css/aos.css">
 	<link rel="stylesheet" href="/commu/resources/css/style.css">
+	<link rel="stylesheet" href="/commu/resources/css/login.css">
 	<script src="/commu/resources/js/jquery-3.6.3.min.js"></script>
 
 	<title>Commu Board Project</title>
@@ -54,15 +57,25 @@
 						<li class="has-children">
 							<a href="#">☆ Star</a>
 							<ul class="dropdown">
-								<li><a href="#">로그인</a></li>
+								<li>
+									<sec:authorize access="isAnonymous()">
+										<a href="/commu/customLogin">로그인</a>
+									</sec:authorize>
+								</li>
 								<li><a href="#">회원가입</a></li>
 								<li class="has-children">
 									<a href="#">My Info</a>
-									<ul class="dropdown">
-										<li><a href="#">Profile</a></li>
-										<li><a href="#">Sub Menu Two</a></li>
-										<li><a href="#">로그아웃</a></li>
-									</ul>
+									<sec:authorize access="isAuthenticated()">
+										<ul class="dropdown">
+										
+											<li><a href="#">Profile</a></li>
+											<sec:authentication property="principal.username"/>
+											<li><a href="#">Sub Menu Two</a></li>
+											<li>
+												<a href="/commu/customLogout">로그아웃</a>
+											</li>
+										</ul>
+									</sec:authorize>
 								</li>
 							</ul>
 						</li>
