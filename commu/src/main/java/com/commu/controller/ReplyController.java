@@ -55,7 +55,7 @@ public class ReplyController {
 		Criteria cri = new Criteria(page, 10);
 		log.info(cri);
 		
-		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListWithPaging(cri, bno), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})

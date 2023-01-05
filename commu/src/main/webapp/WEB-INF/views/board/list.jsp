@@ -34,7 +34,13 @@
 							  	<tr>
 							  		<td class="col-md-1.5"><c:out value="${board.bno}"/></td>
 							  		<td class="col-md-6">
-							  			<a href="${board.bno}" class="move"><c:out value="${board.title}"/></a>
+							  			<a href="${board.bno}" class="move"><c:out value="${board.title}"/>
+							  				<c:if test="${board.replyCnt ne 0 }">
+							  					<span style="color:Hotpink;">
+							  						[<c:out value="${board.replyCnt }"/>]
+							  					</span>
+							  				</c:if>
+							  			</a>
 						  			</td>
 							  		<td class="col-md-2"><c:out value="${board.writer}"/></td>
 							  		<td class="col-md-1.5"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate }"/> </td>

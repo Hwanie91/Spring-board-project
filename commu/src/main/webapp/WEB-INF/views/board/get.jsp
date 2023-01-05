@@ -255,7 +255,7 @@ $(document).ready(function() {
 					showReplyPage(replyTotalCnt);
 				});
 	} // showList end
-	showList();
+	showList(1);
 	
 	// 댓글 페이징 클릭시
 	replyPageFooter.on("click", "li a", function(e) {

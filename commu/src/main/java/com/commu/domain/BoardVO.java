@@ -14,5 +14,6 @@ public class BoardVO {
 	private int hit;
 	private Date regdate;
 	private Date updateDate;
+	private int replyCnt;
 
 }

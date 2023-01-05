@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.commu.domain.BoardVO;
 import com.commu.domain.Criteria;
+import com.commu.domain.ReplyVO;
 import com.commu.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -20,11 +22,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
-
+	
+	@Transactional
 	@Override
 	public void register(BoardVO Board) {
-		mapper.insertLastId(Board);
 		log.info("register..." + Board);
+		mapper.insertLastId(Board);
 	}
 
 	@Override
@@ -38,7 +41,8 @@ public class BoardServiceImpl implements BoardService {
 		log.info("modify..." + Board);
 		return mapper.update(Board) == 1;
 	}
-
+	
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		log.info("remove..." + bno);
