@@ -11,10 +11,10 @@ var replyService = (function() {
 		
 		$.ajax({
 			type: 'post',
-			url: '/commu/replies/new/',
+			url: '/commu/replies/new',
 			data: JSON.stringify(reply),
 			contentType: "application/json; charset=utf-8",
-			success: function(result) {
+			success: function(result, status, xhr) {
 				if(callback) {
 					callback(result);
 				}
@@ -33,7 +33,7 @@ var replyService = (function() {
 		var bno = param.bno;
 		var page = param.page || 1; // 페이지 번호가 있으면 페이지 번호 전달 없으면 1전달.
 		
-		$.getJSON("/commu/replies/pages/" + bno + "/" + page, 
+		$.getJSON("/commu/replies/pages/" + bno + "/" + page + ".json", 
 					function(data) {
 						if(callback) {
 							callback(data.replyTotalCnt, data.list);
@@ -68,7 +68,7 @@ var replyService = (function() {
 	}
 	
 	function get(rno, callback, error) {
-		$.get("/commu/replies/" + rno, function(result) {
+		$.get("/commu/replies/" + rno + ".json", function(result) {
 			if(callback) {
 				callback(result);
 			}

@@ -23,8 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 
 <select id="getListWithPaging" resultType="com.commu.domain.ReplyVO">
-	SELECT * FROM co_reply WHERE bno = #{bno}
-	ORDER BY rno ASC
+	SELECT * FROM co_reply 
+	WHERE bno = #{bno}
+	ORDER BY rno ASC		
 	LIMIT #{cri.skip}, #{cri.amount}
 </select>
 

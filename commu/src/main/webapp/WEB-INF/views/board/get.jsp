@@ -166,22 +166,6 @@ $(document).ready(function() {
 		modal.modal("hide");
 	});
 	
-	// 댓글 쓰기
-	modalRegiBtn.on("click", function(e) {
-		var reply = {
-				reply : modalInputReply.val(),
-				replyer : modalInputReplyer.val(),
-				bno : bnoValue
-		}; // ajax로 전달할 reply 객체 선언 및 할당
-		replyService.add(reply, function(result) {
-			alert(result);
-			modal.find("input").val("");
-			modal.modal("hide");
-			
-			// 댓글 작성 즉시 목록 갱신용 함수 호출
-			showList(-1);
-		});
-	});
 	
 	// 댓글 목록 보이기
 	replyService.getList({
@@ -197,16 +181,16 @@ $(document).ready(function() {
 	var pageNum = 1;
 	var replyPageFooter = $(".panel-footer");
 	
-	function showReplyPage(replyCnt) {
+	function showReplyPage(replyTotalCnt) {
 		var endNum = Math.ceil(pageNum / 10.0) * 10;
 		var startNum = endNum - 9;
 		var prev = startNum != 1;
 		var next = false;
 		
-		if(endNum * 10 >= replyCnt) {
-			endNum = Math.ceil(replyCnt / 10.0);
+		if(endNum * 10 >= replyTotalCnt) {
+			endNum = Math.ceil(replyTotalCnt / 10.0);
 		}
-		if(endNum * 10 < replyCnt) {
+		if(endNum * 10 < replyTotalCnt) {
 			next = true;
 		}
 		
@@ -237,6 +221,7 @@ $(document).ready(function() {
 	}
 	
 	var replyUL = $(".chat");
+	
 	
 	function showList(page) {
 		replyService.getList(
@@ -270,7 +255,7 @@ $(document).ready(function() {
 					showReplyPage(replyTotalCnt);
 				});
 	} // showList end
-	showList(1);
+	showList();
 	
 	// 댓글 페이징 클릭시
 	replyPageFooter.on("click", "li a", function(e) {
@@ -303,6 +288,23 @@ $(document).ready(function() {
 		});
 	});
 	
+	// 댓글 쓰기
+	modalRegiBtn.on("click", function(e) {
+		var reply = {
+				reply : modalInputReply.val(),
+				replyer : modalInputReplyer.val(),
+				bno : bnoValue
+		}; // ajax로 전달할 reply 객체 선언 및 할당
+		replyService.add(reply, function(result) {
+			alert(result);
+			modal.find("input").val("");
+			modal.modal("hide");
+			
+			// 댓글 작성 즉시 목록 갱신용 함수 호출
+			showList(pageNum);
+		});
+	});
+	
 	// 댓글 수정
 	modalModBtn.on("click", function(e) {
 		var reply = {
@@ -312,7 +314,7 @@ $(document).ready(function() {
 		replyService.update(reply, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(-1);
+			showList(pageNum);
 		});
 	}); // 댓글 수정 끝
 	
@@ -322,7 +324,7 @@ $(document).ready(function() {
 		replyService.remove(rno, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(-1);
+			showList(pageNum);
 		});
 	});
 	
