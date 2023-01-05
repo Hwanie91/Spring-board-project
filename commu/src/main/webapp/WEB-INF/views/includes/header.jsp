@@ -54,7 +54,7 @@
 						<li class="has-children">
 							<a href="#">☆ Star</a>
 							<ul class="dropdown">
-								<li><a href="#">로그인</a></li>
+								<li><a href="/commu/customLogin">로그인</a></li>
 								<li><a href="#">회원가입</a></li>
 								<li class="has-children">
 									<a href="#">My Info</a>
