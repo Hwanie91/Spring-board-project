@@ -38,7 +38,7 @@ public class ReplyController {
 		int insertCount = service.register(vo);
 		log.info("Reply insert count : " + insertCount);
 		
-		return insertCount == 1? new ResponseEntity<>("success", HttpStatus.OK)
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		// ResponseEntity : 웹페이지 생성(상태코드, 헤더, 응답, 데이터)
@@ -47,18 +47,18 @@ public class ReplyController {
 		
 	}
 	
-	@GetMapping(value="/pages/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value="/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, 
 													@PathVariable("bno") Long bno) { 
 		// @PathVariable : url로 넘겨받은 값 이용
 		log.info("getList...");
-		Criteria cri = new Criteria(page, 15);
+		Criteria cri = new Criteria(page, 10);
 		log.info(cri);
 		
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno) {
 		log.info("get: " + rno);
 		
