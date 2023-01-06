@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.welcome-header {
+  margin: 1.8rem, 0, 5rem, 0;
+  padding-bottom: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+.welcome-header__title {
+  margin-bottom: 2.5rem;
+  font-size: 1.87rem;
+  font-weight: 700;
+}
+.welcome-header__text {
+  opacity: 0.7;
+  font-size: 1.25rem;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2.5rem;
+}
+#login-form input {
+  padding: 1.3rem 0;
+  border: none;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.3rem;
+  transition: border-color 0.3s ease-in-out;
+}
+#login-form input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+#login-form input:not([type="submit"]) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease-in-out;
+}
+#login-form input:focus {
+  border-color: var(--yellow);
+}
+#login-form input[type="submit"] {
+  background-color: var(--yellow);
+  cursor: pointer;
+  padding: 1.3rem 0;
+  border-radius: 0.3rem;
+  margin-top: 1.3rem;
+}
+#login-form a {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 15px;
+}
+#login-form > input[type=checkbox]:nth-child(3) {
+	text-align: center;
+  	text-decoration: row;
+ 	color: inherit;
+}
+input:focus {outline: none;}
