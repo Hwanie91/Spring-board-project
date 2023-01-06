@@ -57,15 +57,25 @@
 						<li class="has-children">
 							<a href="#">☆ Star</a>
 							<ul class="dropdown">
-								<li><a href="/commu/customLogin">로그인</a></li>
+								<li>
+									<sec:authorize access="isAnonymous()">
+										<a href="/commu/customLogin">로그인</a>
+									</sec:authorize>
+								</li>
 								<li><a href="#">회원가입</a></li>
 								<li class="has-children">
 									<a href="#">My Info</a>
-									<ul class="dropdown">
-										<li><a href="#">Profile</a></li>
-										<li><a href="#">Sub Menu Two</a></li>
-										<li><a href="/commu/customLogout">로그아웃</a></li>
-									</ul>
+									<sec:authorize access="isAuthenticated()">
+										<ul class="dropdown">
+										
+											<li><a href="#">Profile</a></li>
+											<sec:authentication property="principal.username"/>
+											<li><a href="#">Sub Menu Two</a></li>
+											<li>
+												<a href="/commu/customLogout">로그아웃</a>
+											</li>
+										</ul>
+									</sec:authorize>
 								</li>
 							</ul>
 						</li>
