@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.commu.mapper.MemberMapper">
+
+<resultMap type="com.commu.domain.MemberVO" id="memberMap">
+	<id property="userid" column="userid"/>
+	<result property="userid" column="userid"/>
+	<result property="userpw" column="userpw"/>
+	<result property="userName" column="userName"/>
+	<result property="regDate" column="regDate"/>
+	<result property="updateDate" column="updateDate"/>
+	<result property="enabled" column="enabled"/>
+	<collection property="authList" resultMap="authMap"></collection>
+</resultMap>
+
+<resultMap type="com.commu.domain.AuthVO" id="authMap">
+	<result property="userid" column="userid"/>
+	<result property="auth" column="auth"/>
+</resultMap>
+
+<select id="read" resultMap="memberMap">
+	SELECT m.userid, m.userpw, m.username, m.regdate, m.updatedate, m.enabled, ma.auth
+	FROM co_member m JOIN co_member_auth ma
+	ON (m.userid = ma.userid)
+	WHERE m.userid = #{userid}
+</select>
+
+</mapper>
