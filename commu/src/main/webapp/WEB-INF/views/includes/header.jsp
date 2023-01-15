@@ -66,7 +66,7 @@
 								<li class="has-children">
 									<a href="#">My Info</a>
 									<sec:authorize access="isAuthenticated()">
-										<ul class="dropdown">
+										<ul class="dropdown">                                   
 										
 											<li><a href="#">Profile</a></li>
 											<sec:authentication property="principal.username"/>
