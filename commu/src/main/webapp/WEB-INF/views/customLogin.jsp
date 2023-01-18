@@ -13,7 +13,7 @@
 			    <p class="welcome-header__text">If you heve a Commu Account,</p> 
 			    <p class="welcome-header__text">log in with your ID.</p>
 		  	</header>
-  			<form action="/login" method="post" id="login-form">
+  			<form action="/commu/customLogin" method="post" id="login-form">
 		    	<input name="username" type="text" placeholder="ID" class="form-control">
 	    		<input name="password" type="password" placeholder="Password" class="form-control">
 	    		<div>
