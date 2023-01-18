@@ -1,5 +1,6 @@
 package com.commu.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ public class BoardController {
 	
 	// 글쓰기
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		// @Controller 어노테이션이 붙고, 컴포넌트 스캔에 패키지가 지정되어 있다면, 
 		// 매개변수 인자들은 스프링이 자동으로 생성 할당 함.
@@ -65,6 +67,7 @@ public class BoardController {
 	
 	// 글 수정
 	@PostMapping("/modify") // post 요청으로 /modify가 온다면, 아래 메소드 수행
+	@PreAuthorize("principal.username==#board.writer")
 	public String modify(BoardVO board, RedirectAttributes rttr, Criteria cri) {
 		log.info("modify : " + board);
 		if(service.modify(board)) {
@@ -80,6 +83,7 @@ public class BoardController {
 	
 	// 글 삭제
 	@PostMapping("/remove")
+	@PreAuthorize("principal.username==#board.writer")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("remove" + bno);
 		if(service.remove(bno)) {
