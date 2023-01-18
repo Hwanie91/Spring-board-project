@@ -13,7 +13,7 @@
 			    <h2>${error }</h1>
 			    <h2>${logout}</h1>
 		  	</div>
-  			<form role="form" action="/commu/custonlogout" method="post">
+  			<form role="form" action="/customLogout" method="post">
 		    	<fieldset>
 		    		<a href="index.html" class="btn btn-lg btn-success btn-block">
 		    			로그아웃

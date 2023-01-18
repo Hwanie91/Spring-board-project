@@ -64,12 +64,13 @@
 								</li>
 								<li><a href="#">회원가입</a></li>
 								<li class="has-children">
-									<a href="#">My Info</a>
 									<sec:authorize access="isAuthenticated()">
+									<a href="#">My Info</a>
+									
 										<ul class="dropdown">                                   
 										
-											<li><a href="#">Profile</a></li>
-											<sec:authentication property="principal.username"/>
+											<li><a href="#">Profile<sec:authentication property="principal.username"/></a></li>
+											
 											<li><a href="#">Sub Menu Two</a></li>
 											<li>
 												<a href="/commu/customLogout">로그아웃</a>
