@@ -5,15 +5,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.commu.domain.CustomUser;
 import com.commu.domain.MemberVO;
 import com.commu.mapper.MemberMapper;
+import com.commu.security.domain.CustomUser;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class CustomUserDetailService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Setter(onMethod_ = {@Autowired})
 	private MemberMapper memberMapper; // 퀴리 조작을 위한 멥퍼 인터페이스 초기화

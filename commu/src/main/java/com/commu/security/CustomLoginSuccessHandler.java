@@ -22,11 +22,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		);
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/commu/sample/admin");
+			response.sendRedirect("/sample/admin");
 			return;
 		}
 		if(roleNames.contains("ROLE_MEMBER")) {
-			response.sendRedirect("/commu/sample/member");
+			response.sendRedirect("/sample/member");
 			return;
 		}
 		

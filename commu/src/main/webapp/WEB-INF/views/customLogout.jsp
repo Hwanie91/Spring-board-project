@@ -13,9 +13,9 @@
 			    <h2>${error }</h1>
 			    <h2>${logout}</h1>
 		  	</div>
-  			<form role="form" action="/customLogout" method="post">
+  			<form role="form" action="/commu/customLogout" method="post">
 		    	<fieldset>
-		    		<a href="/commu" class="btn btn-lg btn-success btn-block">
+		    		<a class="btn btn-lg btn-success btn-block">
 		    			로그아웃
 		    		</a>
 		    	</fieldset>
@@ -30,6 +30,7 @@
 	$(".btn-success").on("click", function(e) {
 		e.preventDefault();
 		$("form").submit();
+		
 	});
 </script>
 
