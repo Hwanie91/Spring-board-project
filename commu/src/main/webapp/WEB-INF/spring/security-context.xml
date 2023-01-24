@@ -5,7 +5,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+	<bean id="customAccessDeniedHandler" class="com.commu.security.CustomAccessDeniedHandler"></bean>
+	
+	<bean id="customLoginSuccess" class="com.commu.security.CustomLoginSuccessHandler"></bean>
+	
 	<!-- 암호화 처리, 사용자 계정 정보 처리 -->
 	<bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
@@ -15,15 +18,34 @@
         <!-- 아이디 패스워드로 로그인 처리 객체 -->
 
 	<security:http> <!-- 웹 접근에 대해서, -->
-		<security:form-login login-page="/customLogin"/>
-		<security:logout logout-url="/customLogout"
-			invalidate-session="true"/>
+		<!--인터셉터를 통해 접근 제한-->
+  		<!-- /sample/all 에는 모든 접근을 허용(permitAll)-->
+  		<security:intercept-url pattern="/sample/all" access="permitAll"/>
+		<!-- /sample/member 에는 ROLE_MEMBER 권한을 가진 사용자만 허용-->
+  		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+  		<!--전에 생성했던 /sample/admin URI에 ADMIN 유저만 접근 할 수 있도록 설정한다.-->
+  		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+  		
+		<!-- <security:form-login/> -->
+		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+		
+		<!--접근이 거부됐을 때 보일 화면을 지정-->
+		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		<security:access-denied-handler ref="customAccessDeniedHandler"/>
+		
+		<security:logout logout-url="/customLogout" invalidate-session="true"/>
+		
 	</security:http>
 	
 	<security:authentication-manager> <!-- 인증 처리 관리자 -->
-		<security:authentication-provider
-			user-service-ref="customUserDetailService"> <!-- 인증처리 공급자 -->
-			<security:password-encoder ref="bcryptPasswordEncoder"/>	
+		<security:authentication-provider> <!-- 인증처리 공급자 -->
+	 		<security:user-service>
+      		<!--"member"라는 이름의 "MEMBER"권한을 갖는 in-memory유저 생성-->
+      		<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+      		<!--MEMBER와 ADMIN 권한을 갖는 admin 유저 생성-->
+      		<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
+    		</security:user-service>
+			<!-- <security:password-encoder ref="bcryptPasswordEncoder"/> -->	
 		</security:authentication-provider>
 	</security:authentication-manager>
 

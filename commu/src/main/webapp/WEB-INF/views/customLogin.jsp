@@ -9,7 +9,7 @@
 	<div class="row" style="margin-top: 5rem;">
 		<div class="col-lg-5 border p-5 rounded-3" style="margin: auto;">
 			<header class="welcome-header">
-			    <h1 class="welcome-header__title">Welcome to Commu Board${error }${logout}</h1>
+			    <h1 class="welcome-header__title">Welcome to Commu Board<br>${error }${logout}</h1>
 			    <p class="welcome-header__text">If you heve a Commu Account,</p> 
 			    <p class="welcome-header__text">log in with your ID.</p>
 		  	</header>

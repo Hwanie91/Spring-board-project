@@ -31,7 +31,9 @@
 	   								</div>
 	   								<div class="form-group">
 	   									<label>작성자</label>
-	   									<input class="form-control" name="writer">
+	   									<input class="form-control" name="writer"
+	   										value='<sec:authentication property="principal.username"/>'
+											readonly="readonly">
 	   								</div>
 	   								<button type="submit" class="btn btn-primary">전송</button>
 	   								<button type="reset" class="btn btn-primary">최소</button>
@@ -48,6 +50,7 @@
 	
 <script>
 
+	
 </script>
 
 <%@ include file="../includes/footer.jsp" %>

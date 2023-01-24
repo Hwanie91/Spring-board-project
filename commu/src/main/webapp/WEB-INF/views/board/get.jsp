@@ -38,9 +38,14 @@
 	   											value='<c:out value="${board.writer }"></c:out>' readonly="readonly">
 	   								</div>
 	   								<div class="p-2">
-	   								<button data-oper="modify" id="modifyB" class="btn btn-primary">수정
-	   									<%-- <a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a> --%> 
-	   								</button>
+	   								<sec:authentication property="principal" var="pinfo"/>
+									<sec:authorize access="isAuthenticated()">
+										<c:if test="${pinfo.username eq board.wrtier }">
+	   										<button data-oper="modify" id="modifyB" class="btn btn-primary">수정
+	   											<%-- <a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a> --%> 
+	   										</button>
+	   									</c:if>
+									</sec:authorize>
 	   								<button data-oper="list" id="listB" class="btn btn-primary">목록
 	   									<%-- <a href="/commu/board/list?pageNum=${cri.pageNum }&amount=${cri.amount} "> 목록</a> --%>
 	   								</button>
@@ -50,7 +55,9 @@
 	   							<div class="panel p-1" >
 	   								<div style="display: flex; justify-content: space-between; align-items: center;">
 	   									<div><i class="bi bi-chat-right-text-fill"></i>댓글</div>
-	   									<div><button id="addReplyBtn" class="btn-sm btn-success">reply</button></div>
+	   									<sec:authorize access="isAuthenticated()">
+	   										<div><button id="addReplyBtn" class="btn-sm btn-success">reply</button></div>
+	   									</sec:authorize>
 	   								</div>
 	   								<br>
 	   								<div class="panel-body">

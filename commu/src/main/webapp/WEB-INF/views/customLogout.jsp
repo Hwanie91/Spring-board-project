@@ -15,7 +15,7 @@
 		  	</div>
   			<form role="form" action="/customLogout" method="post">
 		    	<fieldset>
-		    		<a href="index.html" class="btn btn-lg btn-success btn-block">
+		    		<a href="/commu" class="btn btn-lg btn-success btn-block">
 		    			로그아웃
 		    		</a>
 		    	</fieldset>
