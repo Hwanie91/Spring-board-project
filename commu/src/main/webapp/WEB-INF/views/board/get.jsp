@@ -40,7 +40,7 @@
 	   								<div class="p-2">
 	   								<sec:authentication property="principal" var="pinfo"/>
 									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq board.wrtier }">
+										<c:if test="${pinfo.username eq board.writer }">
 	   										<button data-oper="modify" id="modifyB" class="btn btn-primary">수정
 	   											<%-- <a href="/commu/board/modify?bno=${board.bno }&pageNum=${cri.pageNum}&amount=${cri.amount}"> 수정</a> --%> 
 	   										</button>
@@ -120,16 +120,17 @@
 <script>
 $(document).ready(function() {
 	
+	var replyer = null;
+	<sec:authorize access="isAuthenticated()">
+		replyer='${pinfo.username}';
+	</sec:authorize>
+	
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
-	
-	var replyer = null;
-	<sec:authorize access="isAuthenticated()">
-		replyer='${pinfo.username}';
-	</sec:authorize>
+
 	
 	$("#listB").on("click", function(e) {
 		e.preventDefault();
