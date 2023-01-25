@@ -67,9 +67,9 @@ public class ReplyController {
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/{rno}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	@PreAuthorize("principal.username == #reply.replyer")
-	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
+	@DeleteMapping(value = "/{rno}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	@PreAuthorize("principal.username == #vo.replyer")
+	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		log.info("remove" + rno);
 		
 		return service.remove(rno) == 1? new ResponseEntity<>("success", HttpStatus.OK)
@@ -78,7 +78,7 @@ public class ReplyController {
 	
 	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", 
 						consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	@PreAuthorize("principal.username == #reply.replyer")
+	@PreAuthorize("principal.username == #vo.replyer")
 	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		vo.setRno(rno);
 		log.info("rno : " + rno);

@@ -90,7 +90,7 @@
 						<label>reply</label><input class="form-control" name="reply" value="new reply">
 					</div>
 					<div class="form-group">
-						<label>writer</label><input class="form-control" name="replyer" value="replyer">
+						<label>writer</label><input class="form-control" name="replyer" value="replyer" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label>replyDate</label><input class="form-control" name="replyDate" value="">
@@ -121,8 +121,8 @@
 $(document).ready(function() {
 	
 	var replyer = null;
-	<sec:authorize access="isAuthenticated()">
-		replyer='${pinfo.username}';
+	<sec:authorize access = "isAuthenticated()">
+		replyer = '${pinfo.username}';
 	</sec:authorize>
 	
 	var csrfHeaderName = "${_csrf.headerName}";
@@ -349,7 +349,7 @@ $(document).ready(function() {
 		replyService.update(reply, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(-1);
+			showList(pageNum);
 		});
 	});
 	
@@ -370,7 +370,7 @@ $(document).ready(function() {
 		replyService.remove(rno, originalReplyer, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(-1);
+			showList(pageNum);
 		});
 	});
 	
