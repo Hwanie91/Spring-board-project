@@ -20,6 +20,7 @@
 	   					<div>
 	   						<div>
 	   							<form method="post" id="modifyForm" action="modify" role="form">
+	   								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 									<input type="hidden" name="bno" value='<c:out value="${board.bno }"></c:out>'>
 	 
 	   								<div class="form-group">
@@ -36,10 +37,15 @@
 	   								<div class="form-group">
 	   									<label>작성자</label>
 	   									<input class="form-control" name="writer" 
-	   											value='<c:out value="${board.writer }"></c:out>'>
+	   											value='<c:out value="${board.writer }"></c:out>' readonly="readonly">
 	   								</div>
-	   								<button type="submit" data-oper="modify" class="btn btn-primary">수정</button>
-	   								<button type="submit" data-oper="remove" class="btn btn-primary">삭제</button>
+	   								<sec:authentication property="principal" var="pinfo"/>
+	   								<sec:authorize access="isAuthenticated()">
+	   									<c:if test="${pinfo.username eq board.writer }">
+	   										<button type="submit" data-oper="modify" class="btn btn-primary">수정</button>
+	   										<button type="submit" data-oper="remove" class="btn btn-primary">삭제</button>
+	   									</c:if>
+	   								</sec:authorize>
 	   								<button type="submit" data-oper="list" class="btn btn-primary">목록</button>
 	   								
 	   							</form>
@@ -55,6 +61,10 @@
 	
 <script>
 $(document).ready(function() {
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
 	var formObj = $("#modifyForm");
 	$('button').on("click", function(e) {
 		e.preventDefault();
