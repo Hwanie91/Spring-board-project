@@ -51,6 +51,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public void register() {
 		// 이동할 주소를 리턴하지 않으면, 요청한 이름으로의 jsp 파일을 찾음
 	}
