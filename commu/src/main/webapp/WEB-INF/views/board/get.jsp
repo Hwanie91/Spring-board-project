@@ -119,6 +119,18 @@
 <script src="/commu/resources/js/reply.js"></script>
 <script>
 $(document).ready(function() {
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	});
+	
+	var replyer = null;
+	<sec:authorize access="isAuthenticated()">
+		replyer='${pinfo.username}';
+	</sec:authorize>
+	
 	$("#listB").on("click", function(e) {
 		e.preventDefault();
 		var operation = $(this).data("oper");
@@ -159,6 +171,9 @@ $(document).ready(function() {
 	// 댓글 입력 모달창
 	$("#addReplyBtn").on("click", function(e) { // 댓글쓰기 버튼을 클릭하면
 		modal.find("input").val(""); // 모달의 모든 입력창을 초기화
+		modal.find("input[name='replyer']").val(replyer);
+		modal.find("input[name='replyer']").attr("readonly", "readonly");
+		
 		modalInputReplydate.closest("div").hide();
 		// closest : 선택요소와 가장 가까운 요소를 지정.
 		// 즉, modalInputReplydate 요소의 가장 가까운 div를 찾아서 숨김(날짜창)
@@ -314,24 +329,47 @@ $(document).ready(function() {
 	
 	// 댓글 수정
 	modalModBtn.on("click", function(e) {
+		var originalReplyer = modalInputReplyer.val();
 		var reply = {
-			rno : modal.data("rno"),
-			reply : modalInputReply.val()
+				rno : modal.data("rno"),
+				reply : modalInputReply.val(),
+				replyer : originalReplyer
 		};
+		if (!replyer) {
+			alert("로그인 후 수정 가능");
+			modal.modal("hide");
+			return;
+		}
+		if (replyer != originalReplyer) {
+			alert("자신이 작성한 댓글만 수정 가능");
+			modal.modal("hide");
+			return;
+		}
 		replyService.update(reply, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(pageNum);
+			showList(-1);
 		});
-	}); // 댓글 수정 끝
+	});
 	
 	// 댓글 삭제
 	modalRemoveBtn.on("click", function(e) {
 		var rno = modal.data("rno");
-		replyService.remove(rno, function(result) {
+		var originalReplyer = modalInputReplyer.val();
+		if (!replyer) {
+			alert("로그인 후 삭제 가능");
+			modal.modal("hide");
+			return;
+		}
+		if (replyer != originalReplyer) {
+			alert("자신이 작성한 댓글만 삭제 가능");
+			modal.modal("hide");
+			return;
+		}
+		replyService.remove(rno, originalReplyer, function(result) {
 			alert(result);
 			modal.modal("hide");
-			showList(pageNum);
+			showList(-1);
 		});
 	});
 	
