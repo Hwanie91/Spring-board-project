@@ -47,10 +47,9 @@
 					<a href="#" class="logo m-0 float-start">Commu Board</a>
 
 					<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu">
-						<li class="active"><a href="/commu">Home</a></li>
-						<li><a href="/commu/board/list">게시판</a></li>
-						<li><a href="#">영상저장소</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li class="nav-item 'active':''"><a href="/commu">Home</a></li>
+						<li class="nav-item"><a href="/commu/board/list">게시판</a></li>
+						<li class="nav-item"><a href="#">영상저장소</a></li>
 					</ul>
 					
 					<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
