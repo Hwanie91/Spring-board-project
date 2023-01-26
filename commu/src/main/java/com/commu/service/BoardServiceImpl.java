@@ -33,6 +33,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO get(Long bno) {
 		log.info("get..." + bno);
+		mapper.updateHit(bno);
 		return mapper.read(bno);
 	}
 
@@ -60,6 +61,7 @@ public class BoardServiceImpl implements BoardService {
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
+
 
 
 	
