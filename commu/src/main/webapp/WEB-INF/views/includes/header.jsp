@@ -62,21 +62,17 @@
 									</sec:authorize>
 								</li>
 								<li><a href="#">회원가입</a></li>
-								<li class="has-children">
+								<li>
 									<sec:authorize access="isAuthenticated()">
-									<a href="#">My Info</a>
-									
-										<ul class="dropdown">                                   
-										
-											<li><a href="#">Profile<sec:authentication property="principal.username"/></a></li>
-											
-											<li><a href="#">Sub Menu Two</a></li>
-											<li>
-												<a href="/commu/customLogout">로그아웃</a>
-											</li>
-										</ul>
+										<a href="#">My Info[<sec:authentication property="principal.username"/>]</a>
 									</sec:authorize>
 								</li>
+								<li>
+									<sec:authorize access="isAuthenticated()">
+										<a href="/commu/customLogout">로그아웃</a>
+									</sec:authorize>
+								</li>
+								
 							</ul>
 						</li>
 					</ul>
