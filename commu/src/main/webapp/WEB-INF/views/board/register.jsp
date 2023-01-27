@@ -27,7 +27,7 @@
 	   								</div>
 	   								<div class="form-group">
 	   									<label>내용</label>
-	   									<textarea class="form-control" name="content"rows="" cols=""></textarea>
+	   									<textarea class="form-control" name="content"rows="15" cols=""></textarea>
 	   								</div>
 	   								<div class="form-group">
 	   									<label>작성자</label>

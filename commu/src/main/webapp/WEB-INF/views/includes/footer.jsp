@@ -9,11 +9,10 @@
 				<div class="col-lg-4">
 					<div class="widget">
 						<h3>Contact</h3>
-						<address>43 Raymouth Rd. Baltemoer, London 3910</address>
+						<address>경상북도 포항시 북구 중흥로225번길</address>
 						<ul class="list-unstyled links">
 							<li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-							<li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-							<li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+							<li><a href="mailto:info@mydomain.com">jh27hot@gmail.com</a></li>
 						</ul>
 					</div> <!-- /.widget -->
 				</div> <!-- /.col-lg-4 -->
@@ -22,7 +21,6 @@
 						<h3>Links</h3>
 						<ul class="list-unstyled links">
 							<li><a href="#">게시판</a></li>
-							<li><a href="#">영상저장소</a></li>
 							<li><a href="#">정보</a></li>
 						</ul>
 					</div> <!-- /.widget -->
@@ -34,7 +32,6 @@
 							<li><a href="#"><span class="icon-instagram"></span></a></li>
 							<li><a href="#"><span class="icon-twitter"></span></a></li>
 							<li><a href="#"><span class="icon-github"></span></a></li>
-							<li><a href="#"><span class="icon-pinterest"></span></a></li>
 							<li><a href="#"><span class="icon-dribbble"></span></a></li>
 						</ul>
 					</div> <!-- /.widget -->

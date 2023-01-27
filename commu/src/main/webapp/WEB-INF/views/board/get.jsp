@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% pageContext.setAttribute("replaceChar", "<br>"); %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 
 <%@ include file="../includes/header.jsp" %>
 
@@ -29,8 +32,7 @@
 	   											value='<c:out value="${board.title }"></c:out>' readonly="readonly">
 	   								</div>
 	   								<div class="form-group">내용
-	   									<textarea class="form-control" name="content" readonly="readonly" rows="" cols="">
-	   										<c:out value="${board.content }"></c:out>
+	   									<textarea class="form-control" name="content" readonly="readonly" rows="15" cols="">${fn:replace(board.content, replaceChar, "\\n") }
 	   									</textarea>
 	   								</div>
 	   								<div class="form-group">작성자
@@ -48,13 +50,13 @@
 									</sec:authorize>
 	   								<button data-oper="list" id="listB" class="btn btn-primary">목록
 	   									<%-- <a href="/commu/board/list?pageNum=${cri.pageNum }&amount=${cri.amount} "> 목록</a> --%>
-	   								</button>
+	   								</button><hr>
 	   								</div>
 	   							</div>
 	   							<!-- 댓글 시작-->
 	   							<div class="panel p-1" >
 	   								<div style="display: flex; justify-content: space-between; align-items: center;">
-	   									<div><i class="bi bi-chat-right-text-fill"></i>댓글</div>
+	   									<div><i class="bi bi-chat-right-text-fill"></i> 댓글</div>
 	   									<sec:authorize access="isAuthenticated()">
 	   										<div><button id="addReplyBtn" class="btn-sm btn-success">reply</button></div>
 	   									</sec:authorize>
@@ -87,7 +89,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>reply</label><input class="form-control" name="reply" value="new reply">
+						<label>reply</label><input class="form-control" name="reply" value="new reply" rows="3">
 					</div>
 					<div class="form-group">
 						<label>writer</label><input class="form-control" name="replyer" value="replyer" readonly="readonly">

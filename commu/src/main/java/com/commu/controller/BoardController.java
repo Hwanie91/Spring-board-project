@@ -85,7 +85,7 @@ public class BoardController {
 	// 글 삭제
 	@PostMapping("/remove")
 	@PreAuthorize("principal.username==#board.writer")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
+	public String remove(@RequestParam("bno") Long bno, BoardVO board, RedirectAttributes rttr, Criteria cri) {
 		log.info("remove" + bno);
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");

@@ -30,8 +30,7 @@
 	   								</div>
 	   								<div class="form-group">
 	   									<label>내용</label>
-	   									<textarea class="form-control" name="content" rows="" cols="">
-	   										<c:out value="${board.content }"></c:out>
+	   									<textarea class="form-control" name="content" rows="20" cols=""><c:out value="${board.content }"></c:out>
 	   									</textarea>
 	   								</div>
 	   								<div class="form-group">
