@@ -123,6 +123,7 @@
   ![로그아웃](https://user-images.githubusercontent.com/102968499/215331289-8bb8f763-e48a-4e88-99dd-4be3b6818a06.png)    
   ![로그아웃2](https://user-images.githubusercontent.com/102968499/215331358-fac992a3-4d35-4d59-a7b2-ec63c6bbbe74.png)
   로그아웃 성공 시 로그인 화면으로 redirect 한다.
+  
   **3. 에러 화면**   
   ![에러 페이지](https://user-images.githubusercontent.com/102968499/215332783-49516d6c-bb0e-40c2-866e-c8d49eaa7b65.PNG)
          
@@ -166,8 +167,10 @@
    
 <details>
   
-<summary>패키지 구조 보기</summary>   
+<summary>패키지 구조 보기</summary> 
+
   ![패키지 구조1](https://user-images.githubusercontent.com/102968499/215311670-9cad731a-de4c-438b-96db-7997978432db.PNG)
+  
   ![패키지 구조2](https://user-images.githubusercontent.com/102968499/215311678-31f1c887-f69f-4bb8-91d4-9e717037d7d4.PNG)
 
  </details>   
