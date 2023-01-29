@@ -11,8 +11,7 @@
   - [사용 기술](#3-사용-기술)   
      - [백엔드](#3-1-백엔드)
      - [프론트엔드](#3-2-프론트엔드)
-  - [요구사항 분석](#4-요구사항-분석)
-  - [실행 화면](#5-실행-화면)
+  - [실행 화면](#4-실행-화면)
 
 
 - [구조 및 설계](#구조-및-설계)
@@ -64,10 +63,7 @@
 - jQuery
 - Bootstrap template
 
-### 4. 요구사항 분석
-
-
-### 5. 실행 화면
+### 4. 실행 화면
   <details>
     <summary>게시글 관련</summary>   
        
@@ -170,7 +166,6 @@
 <summary>패키지 구조 보기</summary> 
 
   ![패키지 구조1](https://user-images.githubusercontent.com/102968499/215311670-9cad731a-de4c-438b-96db-7997978432db.PNG)
-  
   ![패키지 구조2](https://user-images.githubusercontent.com/102968499/215311678-31f1c887-f69f-4bb8-91d4-9e717037d7d4.PNG)
 
  </details>   
