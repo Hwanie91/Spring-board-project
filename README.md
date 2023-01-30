@@ -64,6 +64,9 @@
 - Bootstrap template
 
 ### 4. 실행 화면
+
+https://user-images.githubusercontent.com/102968499/215397537-db328334-7252-4794-ae13-1db8fe00d176.mp4
+
   <details>
     <summary>게시글 관련</summary>   
        
